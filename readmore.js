@@ -195,7 +195,8 @@
       }
       else {
         var id = current.attr('id') || uniqueId(),
-            useLink = this.options.startOpen ? this.options.lessLink : this.options.moreLink;
+            useLink = this.options.startOpen ? this.options.lessLink : this.options.moreLink,
+            startHeight = this.options.startOpen ? current.data('expandedHeight') : collapsedHeight;
 
         current.attr({
           'data-readmore': '',
@@ -214,11 +215,9 @@
             'aria-controls': id
           }));
 
-        if (! this.options.startOpen) {
-          current.css({
-            height: collapsedHeight
-          });
-        }
+        current.css({
+          height: startHeight
+        });
 
         if (this.options.blockProcessed && typeof this.options.blockProcessed === 'function') {
           this.options.blockProcessed(current, true);
